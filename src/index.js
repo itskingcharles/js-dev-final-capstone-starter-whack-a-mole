@@ -21,7 +21,7 @@ let difficulty = "hard";
  *
  */
 function randomInteger(min, max) {
-  // return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
@@ -41,7 +41,22 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
-  
+  const easy = 1500;
+  const normal = 1000;
+  const hard = randomInteger(600, 1200);
+  const delay = 0;
+
+  if (difficulty === "easy"){
+      delay = easy;
+  }
+  else if (difficulty === "normal") {
+      delay = normal;
+  }
+  else if (difficulty === "hard") {
+      delay = hard;
+  }
+
+  return delay;
 }
 
 /**
@@ -60,6 +75,19 @@ function setDelay(difficulty) {
  */
 function chooseHole(holes) {
   // TODO: Write your code here.
+  const index = randomInteger(0, 8);
+  
+  const hole = holes[index];
+
+  if (hole === lastHole) {
+    return chooseHole(holes);
+  }
+
+  lastHole = hole;
+
+  return hole;
+
+   
 
 }
 
