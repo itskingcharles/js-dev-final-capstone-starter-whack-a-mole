@@ -41,22 +41,23 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
-  const easy = 1500;
-  const normal = 1000;
+  /*const easy = 0;
+  const normal = 0;
   const hard = randomInteger(600, 1200);
-  const delay = 0;
+  let delay = 0;*/
 
   if (difficulty === "easy"){
-      delay = easy;
+      return 1500;
   }
   else if (difficulty === "normal") {
-      delay = normal;
+      return 1000;
   }
   else if (difficulty === "hard") {
-      delay = hard;
+      return randomInteger(600, 1200);
   }
-
-  return delay;
+  else {
+    console.error("Please enter 'easy','normal', or 'hard'.");
+  } 
 }
 
 /**
@@ -131,12 +132,13 @@ function gameOver() {
 *
 */
 function showUp() {
-  let delay = setDelay(); // TODO: Update so that it uses setDelay()
-  const hole = chooseHole();  // TODO: Update so that it use chooseHole()
-
+  const delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
+  let hole = chooseHole(holes);  // TODO: Update so that it use chooseHole()
+ // toggleVisibility(hole);
   return showAndHide(hole, delay);
 }
 
+showUp();
 /**
 *
 * The purpose of this function is to show and hide the mole given
@@ -145,14 +147,12 @@ function showUp() {
 * the timeoutID
 *
 */
-function showAndHide(hole, delay){
+function showAndHide(mole, delay){
   // TODO: call the toggleVisibility function so that it adds the 'show' class.
-  toggleVisibility(hole);
-
-
+  toggleVisibility(mole);
   const timeoutID = setTimeout(() => {
     // TODO: call the toggleVisibility function so that it removes the 'show' class when the timer times out.
-    toggleVisibility(hole);
+    toggleVisibility(mole);    
     gameOver();
   }, delay); // TODO: change the setTimeout delay to the one provided as a parameter
   return timeoutID;
@@ -166,8 +166,7 @@ function showAndHide(hole, delay){
 */
 function toggleVisibility(hole){
   // TODO: add hole.classList.toggle so that it adds or removes the 'show' class.
-  hole = hole.classList.toggle("show");
-  
+  hole.classList.toggle("show");  
   return hole;
 }
 
@@ -183,7 +182,9 @@ function toggleVisibility(hole){
 */
 function updateScore() {
   // TODO: Write your code here
-
+  points++;
+  
+  score.textContent = points;
   return points;
 }
 
@@ -196,8 +197,8 @@ function updateScore() {
 */
 function clearScore() {
   // TODO: Write your code here
-  // points = 0;
-  // score.textContent = points;
+  points = 0;
+  score.textContent = points;
   return points;
 }
 
@@ -209,7 +210,10 @@ function clearScore() {
 function updateTimer() {
   // TODO: Write your code here.
   // hint: this code is provided to you in the instructions.
-  
+  if (time > 0) {
+    time -= 1;
+    timerDisplay.textContent = time;
+  }
   return time;
 }
 
@@ -221,7 +225,7 @@ function updateTimer() {
 */
 function startTimer() {
   // TODO: Write your code here
-  // timer = setInterval(updateTimer, 1000);
+  timer = setInterval(updateTimer, 1000);
   return timer;
 }
 
@@ -235,7 +239,7 @@ function startTimer() {
 */
 function whack(event) {
   // TODO: Write your code here.
-  // call updateScore()
+  updateScore(points);
   return points;
 }
 
@@ -246,9 +250,13 @@ function whack(event) {
 */
 function setEventListeners(){
   // TODO: Write your code here
-
+  moles.forEach(mole => 
+    mole.addEventListener("click", whack) );
+  
   return moles;
 }
+
+setEventListeners();
 
 /**
 *
@@ -268,7 +276,7 @@ function setDuration(duration) {
 *
 */
 function stopGame(){
-  // stopAudio(song);  //optional
+  //stopAudio(song);  //optional
   clearInterval(timer);
   return "game stopped";
 }
@@ -281,6 +289,8 @@ function stopGame(){
 */
 function startGame(){
   setDuration(10);
+  startTimer();
+  updateTimer();
   showUp();
   return "game started";
 }
