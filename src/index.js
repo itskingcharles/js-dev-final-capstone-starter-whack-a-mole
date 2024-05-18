@@ -41,11 +41,7 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
-  /*const easy = 0;
-  const normal = 0;
-  const hard = randomInteger(600, 1200);
-  let delay = 0;*/
-
+ 
   if (difficulty === "easy"){
       return 1500;
   }
@@ -132,13 +128,14 @@ function gameOver() {
 *
 */
 function showUp() {
-  const delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
-  let hole = chooseHole(holes);  // TODO: Update so that it use chooseHole()
- // toggleVisibility(hole);
+  let delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
+  
+  const hole = chooseHole(holes);  // TODO: Update so that it use chooseHole()
+ 
   return showAndHide(hole, delay);
 }
 
-showUp();
+//showUp();
 /**
 *
 * The purpose of this function is to show and hide the mole given
@@ -147,12 +144,12 @@ showUp();
 * the timeoutID
 *
 */
-function showAndHide(mole, delay){
+function showAndHide(hole, delay){
   // TODO: call the toggleVisibility function so that it adds the 'show' class.
-  toggleVisibility(mole);
+  toggleVisibility(hole);
   const timeoutID = setTimeout(() => {
     // TODO: call the toggleVisibility function so that it removes the 'show' class when the timer times out.
-    toggleVisibility(mole);    
+    toggleVisibility(hole);    
     gameOver();
   }, delay); // TODO: change the setTimeout delay to the one provided as a parameter
   return timeoutID;
@@ -166,6 +163,7 @@ function showAndHide(mole, delay){
 */
 function toggleVisibility(hole){
   // TODO: add hole.classList.toggle so that it adds or removes the 'show' class.
+  //const hole = chooseHole(hole);
   hole.classList.toggle("show");  
   return hole;
 }
@@ -239,7 +237,8 @@ function startTimer() {
 */
 function whack(event) {
   // TODO: Write your code here.
-  updateScore(points);
+  //setEventListeners();
+  points = updateScore();
   return points;
 }
 
@@ -256,7 +255,7 @@ function setEventListeners(){
   return moles;
 }
 
-setEventListeners();
+//setEventListeners();
 
 /**
 *
@@ -288,6 +287,7 @@ function stopGame(){
 *
 */
 function startGame(){
+  setEventListeners();
   setDuration(10);
   startTimer();
   updateTimer();
