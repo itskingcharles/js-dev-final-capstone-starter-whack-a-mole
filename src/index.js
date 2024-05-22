@@ -11,7 +11,8 @@ let time = 0;
 let timer;
 let lastHole = 0;
 let points = 0;
-let difficulty = 0;
+let difficulty = "easy";
+
 
 /**
  * Generates a random integer within a range.
@@ -42,25 +43,24 @@ function randomInteger(min, max) {
  *
  */
 
-function setDelay(difficulty) {
-  // TODO: Write your code here.
-  //getDifficulty();
+// Takes user input via listener to update difficulty variable
 
-  document.querySelector('#difficulty').addEventListener('change', () => {
+dropdown.addEventListener("change", () => {
+   difficulty = dropdown.value;
+});
+
+function setDelay(difficulty) {
+ 
    
-  if (this.value === "easy"){
+  if (difficulty === "easy"){
       return 1500;
   }
-  else if (this.value === "normal") {
+  else if (difficulty === "normal") {
       return 1000;
   }
-  else if (this.value === "hard") {
+  else {
       return randomInteger(600, 1200);
-  }
-  /*else {
-      return console.log("Please enter 'easy','normal', or 'hard'.");
-  } */
-});
+  } 
 }
 
 /**
@@ -77,6 +77,7 @@ function setDelay(difficulty) {
  * const holes = document.querySelectorAll('.hole');
  * chooseHole(holes) //> returns one of the 9 holes that you defined
  */
+
 function chooseHole(holes) {
   // TODO: Write your code here.
   const index = randomInteger(0, 8);
@@ -90,7 +91,6 @@ function chooseHole(holes) {
   lastHole = hole;
 
   return hole;  
-
 }
 
 /**
@@ -105,14 +105,9 @@ function chooseHole(holes) {
 * return the timeoutId if the game continues or the string "game stopped"
 * if the game is over.
 *
-*  // if time > 0:
-*  //   timeoutId = showUp()
-*  //   return timeoutId
-*  // else
-*  //   gameStopped = stopGame()
-*  //   return gameStopped
 *
 */
+
 function gameOver() {
   // TODO: Write your code here
   if (time > 0) {
@@ -134,6 +129,7 @@ function gameOver() {
 * to call `showAndHide(hole, delay)`.
 *
 */
+
 function showUp() {
   let delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
   
@@ -142,7 +138,6 @@ function showUp() {
   return showAndHide(hole, delay);
 }
 
-//showUp();
 /**
 *
 * The purpose of this function is to show and hide the mole given
@@ -151,6 +146,7 @@ function showUp() {
 * the timeoutID
 *
 */
+
 function showAndHide(hole, delay){
   // TODO: call the toggleVisibility function so that it adds the 'show' class.
   toggleVisibility(hole);
@@ -170,7 +166,7 @@ function showAndHide(hole, delay){
 */
 function toggleVisibility(hole){
   // TODO: add hole.classList.toggle so that it adds or removes the 'show' class.
-  //const hole = chooseHole(hole);
+  
   hole.classList.toggle("show");  
   return hole;
 }
@@ -185,11 +181,11 @@ function toggleVisibility(hole){
 * for your implementation:
 *
 */
+
 function updateScore() {
   // TODO: Write your code here
 
-  points++;
-  
+  points++;  
   score.textContent = points;
   return points;
 }
@@ -201,6 +197,7 @@ function updateScore() {
 * the points.
 *
 */
+
 function clearScore() {
   // TODO: Write your code here
   points = 0;
@@ -213,6 +210,7 @@ function clearScore() {
 * Updates the control board with the timer if time > 0
 *
 */
+
 function updateTimer() {
   // TODO: Write your code here.
   // hint: this code is provided to you in the instructions.
@@ -229,6 +227,7 @@ function updateTimer() {
 * the updateTimer function get called. This function is already implemented
 *
 */
+
 function startTimer() {
   // TODO: Write your code here
   timer = setInterval(updateTimer, 1000);
@@ -243,6 +242,7 @@ function startTimer() {
 * the moles.
 *
 */
+
 function whack(event) {
   // TODO: Write your code here.
   
@@ -255,6 +255,7 @@ function whack(event) {
 * Adds the 'click' event listeners to the moles. See the instructions
 * for an example on how to set event listeners using a for loop.
 */
+
 function setEventListeners(){
   // TODO: Write your code here
   moles.forEach(mole => 
@@ -263,15 +264,25 @@ function setEventListeners(){
   return moles;
 }
 
+/**
+*
+* This function sets the duration of the game. The time limit, in seconds,
+* that a player has to click on the sprites.
+*
+*/
 
-/*get user input for difficulty selection
-function getDifficulty() {
+// Takes user input via listener to update difficulty variable
+
+dropdown1.addEventListener("change", () => {
+  time = dropdown1.value;
+});
+
+function setDuration(duration) {
+ 
+  //time = duration;
   
-  dropdown.addEventListener("change", setDelay => {
-    difficulty = dropdown.value;
-  });
-  return difficulty;
-}*/
+  return time;
+}
 
 /**
 *
@@ -279,45 +290,6 @@ function getDifficulty() {
 * that a player has to click on the sprites.
 *
 */
-function setDuration(time) {
-  //duration = dropdown1;
-  //duration = getGameLength();
-  //time = getGameLength;
-  return time;
-}
-
-
-//get user input for game length selection
-function getGameLength() {
-
-  const dropdown1 = document.getElementById("gameLength");
-  
-  dropdown1.addEventListener("change", () => {
-    const selectedDuration = parseInt(dropdown1.value);
-    setDuration(selectedDuration);
-  });
-  return setDuration;
-}
-//setEventListeners();
-
-/**
-*
-* This function sets the duration of the game. The time limit, in seconds,
-* that a player has to click on the sprites.
-*
-*/
-function getDuration() {
-  //duration = dropdown1;
-
-  //const dropdown1 = document.getElementById("gameLength");
-  
-  dropdown1.addEventListener("change", (setDuration) => {
-    const selectedDuration = parseInt(dropdown1.value);
-    time = setDuration(selectedDuration);
-  });
-  //time = setDuration;
-  return time;
-}
 
 /**
 *
@@ -325,6 +297,7 @@ function getDuration() {
 * timer using clearInterval. Returns "game stopped".
 *
 */
+
 function stopGame(){
   //stopAudio(song);  //optional
   clearInterval(timer);
@@ -337,21 +310,19 @@ function stopGame(){
 * is clicked.
 *
 */
+
 function startGame(){
   clearScore();
-  //getGameLength();
-  //getDifficulty();
-  setDelay();
+  setEventListeners();
   setDuration();
-  setEventListeners();    
+  //setDelay();
+        
   startTimer();
   updateTimer();
   showUp();
   return "game started";
 }
 
-//getDifficulty();
-//getGameLength();
 
 startButton.addEventListener("click", startGame);
 
