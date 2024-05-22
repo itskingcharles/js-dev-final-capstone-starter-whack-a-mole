@@ -116,6 +116,7 @@ h2 {
     margin: 0 auto;
     cursor: url('./assets/mallet.png'), pointer;
     margin-top: 50px;
+    margin-bottom: 200px;
     padding-top: 30%;
   }
 }
