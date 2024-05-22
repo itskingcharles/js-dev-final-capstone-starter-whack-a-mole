@@ -45,7 +45,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  cursor: url('./assets/mallet.png'), pointer;
+  /*cursor: url('./assets/mallet.png'), pointer;*/
   margin-top: 50px;
   padding-top: 10%;
 }
@@ -115,16 +115,5 @@ h2 {
   }
 }
 
-@media (min-height: 801px) {
-  .grid {
-    width: 600px;
-    height: 600px;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    cursor: url('./assets/mallet.png'), pointer;
-    margin-top: 50px;
-    padding-top: 30%;
-  }
-}
+
 
