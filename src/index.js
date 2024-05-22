@@ -2,6 +2,8 @@ const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
 // TODO: Add the missing query selectors:
+const dropdown = document.getElementById("difficulty");
+const dropdown1 = document.getElementById("gameLength");
 const score = document.querySelector('#score'); // Use querySelector() to get the score element
 const timerDisplay = document.querySelector('#timer'); // use querySelector() to get the timer element.
 
@@ -9,7 +11,7 @@ let time = 0;
 let timer;
 let lastHole = 0;
 let points = 0;
-let difficulty = "hard";
+let difficulty = 0;
 
 /**
  * Generates a random integer within a range.
@@ -39,21 +41,26 @@ function randomInteger(min, max) {
  * setDelay("hard") //> returns 856 (returns a random number between 600 and 1200).
  *
  */
+
 function setDelay(difficulty) {
   // TODO: Write your code here.
- 
-  if (difficulty === "easy"){
+  //getDifficulty();
+
+  document.querySelector('#difficulty').addEventListener('change', () => {
+   
+  if (this.value === "easy"){
       return 1500;
   }
-  else if (difficulty === "normal") {
+  else if (this.value === "normal") {
       return 1000;
   }
-  else if (difficulty === "hard") {
+  else if (this.value === "hard") {
       return randomInteger(600, 1200);
   }
-  else {
-    console.error("Please enter 'easy','normal', or 'hard'.");
-  } 
+  /*else {
+      return console.log("Please enter 'easy','normal', or 'hard'.");
+  } */
+});
 }
 
 /**
@@ -180,6 +187,7 @@ function toggleVisibility(hole){
 */
 function updateScore() {
   // TODO: Write your code here
+
   points++;
   
   score.textContent = points;
@@ -237,7 +245,7 @@ function startTimer() {
 */
 function whack(event) {
   // TODO: Write your code here.
-  //setEventListeners();
+  
   points = updateScore();
   return points;
 }
@@ -255,6 +263,41 @@ function setEventListeners(){
   return moles;
 }
 
+
+/*get user input for difficulty selection
+function getDifficulty() {
+  
+  dropdown.addEventListener("change", setDelay => {
+    difficulty = dropdown.value;
+  });
+  return difficulty;
+}*/
+
+/**
+*
+* This function sets the duration of the game. The time limit, in seconds,
+* that a player has to click on the sprites.
+*
+*/
+function setDuration(time) {
+  //duration = dropdown1;
+  //duration = getGameLength();
+  //time = getGameLength;
+  return time;
+}
+
+
+//get user input for game length selection
+function getGameLength() {
+
+  const dropdown1 = document.getElementById("gameLength");
+  
+  dropdown1.addEventListener("change", () => {
+    const selectedDuration = parseInt(dropdown1.value);
+    setDuration(selectedDuration);
+  });
+  return setDuration;
+}
 //setEventListeners();
 
 /**
@@ -263,8 +306,16 @@ function setEventListeners(){
 * that a player has to click on the sprites.
 *
 */
-function setDuration(duration) {
-  time = duration;
+function getDuration() {
+  //duration = dropdown1;
+
+  //const dropdown1 = document.getElementById("gameLength");
+  
+  dropdown1.addEventListener("change", (setDuration) => {
+    const selectedDuration = parseInt(dropdown1.value);
+    time = setDuration(selectedDuration);
+  });
+  //time = setDuration;
   return time;
 }
 
@@ -288,13 +339,19 @@ function stopGame(){
 */
 function startGame(){
   clearScore();
-  setEventListeners();
-  setDuration(10);
+  //getGameLength();
+  //getDifficulty();
+  setDelay();
+  setDuration();
+  setEventListeners();    
   startTimer();
   updateTimer();
   showUp();
   return "game started";
 }
+
+//getDifficulty();
+//getGameLength();
 
 startButton.addEventListener("click", startGame);
 
