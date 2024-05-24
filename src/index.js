@@ -46,11 +46,11 @@ function randomInteger(min, max) {
 
 // Takes user input via listener to update difficulty variable
 
-difficulty = dropdown.addEventListener("change", () => {
+dropdown.addEventListener("change", () => {
    difficulty = dropdown.value;
 });
 
-function setDelay(difficulty) {
+function setDelay() {
  
    
   if (difficulty === "easy"){
@@ -273,27 +273,29 @@ function setEventListeners(){
 */
 
 // Takes user input via listener to update difficulty variable
-dropdown1.addEventListener("change", () => {
-  newTime = dropdown1.value;
+newTime = dropdown1.addEventListener("change", () => {
+  newTime = parseInt(dropdown1.value);
 });
 
 
-function setDuration(newTime) { 
+function setDuration() { 
   
-time = newTime;
-if (time = 10) {
-
-  return 10;
+if (newTime === 10) {
+  time = newTime;
+  return time;
 }
-else if (time = 20) {
-  return 20;
+else if (newTime === 20) {
+  time = newTime;
+  return time;
 }
-else if (time = 30) {
-  return 30;
+else if (newTime === 30) {
+  time = newTime;
+  return time;
 }
 else {
-  return 60;
-}  
+  time = 60;
+  return time;
+}
 }
 
 /**
