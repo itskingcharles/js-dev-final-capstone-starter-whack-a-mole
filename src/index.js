@@ -12,7 +12,7 @@ let timer;
 let lastHole = 0;
 let points = 0;
 let difficulty = "easy";
-let newTime = 0;
+let newTime = 10;
 
 
 /**
@@ -273,7 +273,7 @@ function setEventListeners(){
 */
 
 // Takes user input via listener to update difficulty variable
-newTime = dropdown1.addEventListener("change", () => {
+dropdown1.addEventListener("change", () => {
   newTime = parseInt(dropdown1.value);
 });
 
