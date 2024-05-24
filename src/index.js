@@ -45,7 +45,7 @@ function randomInteger(min, max) {
 
 // Takes user input via listener to update difficulty variable
 
-dropdown.addEventListener("change", () => {
+difficulty = dropdown.addEventListener("change", () => {
    difficulty = dropdown.value;
 });
 
@@ -273,11 +273,11 @@ function setEventListeners(){
 
 // Takes user input via listener to update difficulty variable
 
-dropdown1.addEventListener("change", () => {
+time = dropdown1.addEventListener("change", () => {
   time = dropdown1.value;
 });
 
-function setDuration(duration) {
+function setDuration(time) {
  
   //time = duration;
   
