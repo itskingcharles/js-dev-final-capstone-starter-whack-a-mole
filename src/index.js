@@ -12,6 +12,7 @@ let timer;
 let lastHole = 0;
 let points = 0;
 let difficulty = "easy";
+let newTime = 0;
 
 
 /**
@@ -272,16 +273,27 @@ function setEventListeners(){
 */
 
 // Takes user input via listener to update difficulty variable
-
-time = dropdown1.addEventListener("change", () => {
-  time = dropdown1.value;
+dropdown1.addEventListener("change", () => {
+  newTime = dropdown1.value;
 });
 
-function setDuration(time) {
- 
-  //time = duration;
+
+function setDuration(newTime) { 
   
-  return time;
+time = newTime;
+if (time = 10) {
+
+  return 10;
+}
+else if (time = 20) {
+  return 20;
+}
+else if (time = 30) {
+  return 30;
+}
+else {
+  return 60;
+}  
 }
 
 /**
@@ -315,8 +327,6 @@ function startGame(){
   clearScore();
   setEventListeners();
   setDuration();
-  //setDelay();
-        
   startTimer();
   updateTimer();
   showUp();
